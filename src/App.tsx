@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 export default function App() {
+  const [subscription, setSubscription] = useState('');
   useEffect(() => {
     window.addEventListener('load', async () => {
       const sw = await navigator.serviceWorker.register('./service-worker.js');
@@ -17,14 +18,22 @@ export default function App() {
       userVisibleOnly: true,
       applicationServerKey: publicKey,
     });
-    console.log(`push subscription :\n\n${JSON.stringify(push)}`);
+    console.log(`push subscription :\n\n${JSON.stringify(push, null, 2)}`);
+    setSubscription(JSON.stringify(push, null, 2));
   }
+
+  const style = {
+    width: '100%'
+  };
 
   return (
     <div>
       <button onClick={handleSubscribeWebPush}>
         Subscript web push
       </button>
+      <div>
+        <textarea rows={10} style={style} value={subscription} />
+      </div>
     </div>
   );
 }

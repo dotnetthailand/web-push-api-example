@@ -15,8 +15,9 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-// // This is the same output of calling JSON.stringify on a PushSubscription
-// const pushSubscription = {
+// This is the same output of calling JSON.stringify on a PushSubscription
+
+// const pushSubscription = 
 //   endpoint: '.....',
 //   keys: {
 //     auth: '.....',
@@ -24,4 +25,8 @@ webpush.setVapidDetails(
 //   }
 // };
 
-// webpush.sendNotification(pushSubscription, 'Your Push Payload Text');
+const pushSubscription =
+const notification = { title: `Hello at ${(new Date()).toISOString()}` };
+
+
+webpush.sendNotification(pushSubscription,);
