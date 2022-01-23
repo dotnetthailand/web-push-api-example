@@ -1,3 +1,6 @@
+// https://developers.google.com/web/updates/2015/05/notifying-you-of-changes-to-notifications
+// https://felixgerschau.com/web-push-notifications-tutorial/
+// https://developers.google.com/web/fundamentals/codelabs/push-notifications
 const webpush = require('web-push');
 
 // VAPID keys should be generated only once with: 
@@ -25,8 +28,5 @@ webpush.setVapidDetails(
 //   }
 // };
 
-const pushSubscription =
 const notification = { title: `Hello at ${(new Date()).toISOString()}` };
-
-
-webpush.sendNotification(pushSubscription,);
+webpush.sendNotification(pushSubscription, JSON.stringify(notification));
