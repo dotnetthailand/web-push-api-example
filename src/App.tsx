@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
 
-function App() {
+export default function App() {
+  useEffect(() => {
+    window.addEventListener('load', async () => {
+      const sw = await navigator.serviceWorker.register('./service-worker.js');
+      console.log('A service worker has been registered.')
+      console.log(sw);
+    });
+  }, []);
+
+  const handleSubscribeWebPush = async () => {
+    const sw = await navigator.serviceWorker.ready;
+    const publicKey = 'BHG9NdYdfiCIx7xUS8u2CMhtDD-GWHb6QYuSZ908NZYZHhJEjGjcX0yTjHrWx7gDICmCEUORrLmw3uwOGBqzm2s';
+    const push = await sw.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: publicKey,
+    });
+    console.log(`push subscription :\n\n${JSON.stringify(push)}`);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={handleSubscribeWebPush}>
+        Subscript web push
+      </button>
     </div>
   );
 }
 
-export default App;

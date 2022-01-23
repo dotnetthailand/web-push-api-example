@@ -1,0 +1,29 @@
+name: build CRA
+on:
+  push:
+    branches:
+      - main
+env:
+  NODE_VERSION: 14.x # Set Node.js version to use
+
+jobs:
+  build:
+    # Find more virtual environments
+    # https://www.dotnetthailand.com/programming-cookbook/github-actions/github-actions-fundamentals#findmorevirtualenvironments
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the latest source code from ${{ github.ref }} commit
+        uses: actions/checkout@v2
+
+      - name: Use Node.js version ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build CRA to "build" folder
+        run: |
+          yarn install
+          yarn build
+
+      
