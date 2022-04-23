@@ -29,7 +29,7 @@ export default function App() {
   return (
     <div>
       <button onClick={handleSubscribeWebPush}>
-        Subscript web push
+        Subscript Web Push
       </button>
       <div>
         <textarea rows={10} style={style} value={subscription} />

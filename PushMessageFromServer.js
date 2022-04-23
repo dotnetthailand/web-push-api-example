@@ -18,7 +18,7 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-// This is the same output of calling JSON.stringify on a PushSubscription
+// This is the sample output of calling JSON.stringify on a PushSubscription
 
 // const pushSubscription = 
 //   endpoint: '.....',
