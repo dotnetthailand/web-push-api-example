@@ -49,6 +49,8 @@ self.addEventListener('notificationclick', (event) => {
   notification.close();
   if (action === 'open-product-link') {
     // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+
+    // https://web-push-book.gauntface.com/common-notification-patterns/
     clients.openWindow(notification.data.url);
   }
 
