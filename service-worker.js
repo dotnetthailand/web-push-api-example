@@ -1,4 +1,7 @@
 // https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+
+import { isJsxOpeningLikeElement } from "typescript";
+
 // https://web-push-book.gauntface.com/display-a-notification/
 self.addEventListener('push', (event) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/PushEvent/data
@@ -17,8 +20,8 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         // https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications#the_notificationclick_event 
-        action: 'open-a-link',
-        title: 'Open a link',
+        action: 'open-product-link',
+        title: `Open product's link`,
         //icon: '/demos/notification-examples/images/action-1-128x128.png'
       }
     ],
@@ -42,14 +45,15 @@ async function showNotificationAsync(payload, options) {
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
 self.addEventListener('notificationclick', (event) => {
-  const { action, notification } = event;
-  console.log(JSON.stringify(notification.data, null, 2))
-
-  notification.close();
-
-  if (action === 'open-a-link') {
-    // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
-    clients.openWindow(notification.data.url);
-  }
-
+  const { action, notification: { data } } = event;
+  console.log(JSON.stringify(data, null, 2))
+  event.waitUntil(openProductLink(action, data));
 });
+
+async function openProductLink(action, data) {
+  notification.close();
+  if (action === 'open-product-link') {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+    await clients.openWindow(data.url);
+  }
+}
