@@ -3,7 +3,7 @@
 self.addEventListener('push', (event) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/PushEvent/data
   const payload = event.data.json();
-  console.log(`payload: ${payload}`);
+  console.log(`payload: ${JSON.stringify(payload, null, 2)}`);
 
   const options = {
     body: payload.body,
