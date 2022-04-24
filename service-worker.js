@@ -1,7 +1,4 @@
 // https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
-
-import { isJsxOpeningLikeElement } from "typescript";
-
 // https://web-push-book.gauntface.com/display-a-notification/
 self.addEventListener('push', (event) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/PushEvent/data
