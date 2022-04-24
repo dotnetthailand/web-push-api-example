@@ -35,6 +35,7 @@ self.addEventListener('push', (event) => {
 
 });
 
+// https://stackoverflow.com/a/63917373/1872200
 // aync function is a function that synchronously returns a promise
 async function showNotificationAsync(payload, options) {
   await self.registration.showNotification(payload.title, options);
@@ -44,7 +45,13 @@ async function showNotificationAsync(payload, options) {
 self.addEventListener('notificationclick', (event) => {
   const { action, notification: { data } } = event;
   console.log(JSON.stringify(data, null, 2))
-  event.waitUntil(openProductLink(action, data));
+  notification.close();
+  if (action === 'open-product-link') {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+    clients.openWindow(data.url);
+  }
+
+  // event.waitUntil(openProductLink(action, data));
 });
 
 async function openProductLink(action, data) {
