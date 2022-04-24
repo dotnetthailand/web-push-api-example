@@ -31,9 +31,14 @@ self.addEventListener('push', (event) => {
   // https://javascript.info/async-await
 
   // https://swizec.com/blog/how-to-add-real-web-push-notifications-to-your-webapp/
-  event.waitUntil(self.registration.showNotification(payload.title, options));
+  event.waitUntil(showNotificationAsync(payload, options));
+
 });
 
+// aync function is a function that synchronously returns a promise
+async function showNotificationAsync(payload, options) {
+  await self.registration.showNotification(payload.title, options);
+}
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
 self.addEventListener('notificationclick', (event) => {
