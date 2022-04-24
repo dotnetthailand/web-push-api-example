@@ -3,6 +3,7 @@
 self.addEventListener('push', (event) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/PushEvent/data
   const payload = event.data.json();
+  console.log(`payload: ${payload}`);
 
   const options = {
     body: payload.body,
@@ -12,7 +13,7 @@ self.addEventListener('push', (event) => {
     // The notification object includes a tag attribute that is the grouping key. 
     // When creating a notification with a tag and there is already a notification with the same tag visible to the user, 
     // the system automatically replaces it without creating a new notification. 
-    tag: 'vibration-sample',
+    // tag: 'vibration-sample',
     actions: [
       {
         // https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications#the_notificationclick_event 
@@ -21,11 +22,26 @@ self.addEventListener('push', (event) => {
         //icon: '/demos/notification-examples/images/action-1-128x128.png'
       }
     ],
+    data: {
+      url: payload.url
+    }
   }; // end of options
 
-  event.waitUntil(
-    self.registration.showNotification(payload.title, options)
-  );
+  event.waitUntil(async () => {
+    await self.registration.showNotification(payload.title, options);
+  });
+
 });
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
+self.addEventListener('notificationclick', (event) => {
+  const { action, notification } = event;
+
+  event.waitUntil(async () => {
+    if (action === 'open-a-link') {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+      await clients.openWindow(notification.data.url);
+    }
+    notification.close();
+  });
+});
