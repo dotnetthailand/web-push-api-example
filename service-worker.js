@@ -27,21 +27,24 @@ self.addEventListener('push', (event) => {
     }
   }; // end of options
 
-  event.waitUntil(async () => {
-    await self.registration.showNotification(payload.title, options);
-  });
+  // https://javascript.info/promise-basics
+  // https://javascript.info/async-await
 
+  // https://swizec.com/blog/how-to-add-real-web-push-notifications-to-your-webapp/
+  event.waitUntil(self.registration.showNotification(payload.title, options));
 });
+
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
 self.addEventListener('notificationclick', (event) => {
   const { action, notification } = event;
+  console.log(JSON.stringify(notification.data, null, 2))
 
-  event.waitUntil(async () => {
-    if (action === 'open-a-link') {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
-      await clients.openWindow(notification.data.url);
-    }
-    notification.close();
-  });
+  notification.close();
+
+  if (action === 'open-a-link') {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+    clients.openWindow(notification.data.url);
+  }
+
 });
