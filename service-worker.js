@@ -43,12 +43,13 @@ async function showNotificationAsync(payload, options) {
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
 self.addEventListener('notificationclick', (event) => {
-  const { action, notification: { data } } = event;
-  console.log(JSON.stringify(data, null, 2))
+  const { action, notification } = event;
+  console.log(JSON.stringify(notification, null, 2))
+
   notification.close();
   if (action === 'open-product-link') {
     // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
-    clients.openWindow(data.url);
+    clients.openWindow(notification.data.url);
   }
 
   // event.waitUntil(openProductLink(action, data));
