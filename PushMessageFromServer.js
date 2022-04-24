@@ -28,5 +28,5 @@ webpush.setVapidDetails(
 //   }
 // };
 
-const notification = { title: `Hello at ${(new Date()).toISOString()}` };
-webpush.sendNotification(pushSubscription, JSON.stringify(notification));
+const payload = { title: `Hello at ${(new Date()).toISOString()}` };
+webpush.sendNotification(pushSubscription, JSON.stringify(payload));
