@@ -1,10 +1,10 @@
 // https://developers.google.com/web/updates/2015/05/notifying-you-of-changes-to-notifications
 // https://felixgerschau.com/web-push-notifications-tutorial/
 // https://developers.google.com/web/fundamentals/codelabs/push-notifications
-const webpush = require('web-push');
+const webPush = require('web-push');
 
 // VAPID keys should be generated only once with: 
-// const vapidKeys = webpush.generateVAPIDKeys();
+// const vapidKeys = webPush.generateVAPIDKeys();
 // console.log(vapidKeys);
 
 const vapidKeys = {
@@ -12,21 +12,25 @@ const vapidKeys = {
   privateKey: 'wDf6oqOkg0SQ3FD8NU9ZNrwVZWIGBfm1gPgp6QNXWjk'
 };
 
-webpush.setVapidDetails(
+webPush.setVapidDetails(
   'mailto:example@yourdomain.org',
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );
 
-// This is the sample output of calling JSON.stringify on a PushSubscription
+// This is an sample subscription object that we get after subscript on browser
+const pushSubscription =
+{
+  "endpoint": "",
+  "keys": {
+    "p256dh": "",
+    "auth": ""
+  }
+}
 
-// const pushSubscription = 
-//   endpoint: '.....',
-//   keys: {
-//     auth: '.....',
-//     p256dh: '.....'
-//   }
-// };
+const payload = {
+  title: `Hello at ${(new Date()).toISOString()}`,
+  url: 'https://www.dotnetthailand.com'
+};
 
-const payload = { title: `Hello at ${(new Date()).toISOString()}` };
-webpush.sendNotification(pushSubscription, JSON.stringify(payload));
+webPush.sendNotification(pushSubscription, JSON.stringify(payload));

@@ -17,14 +17,16 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         // https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications#the_notificationclick_event 
-        action: 'open-product-link',
-        title: `Open product's link`,
+        action: 'open-a-link',
+        title: `Open a link`,
         //icon: '/demos/notification-examples/images/action-1-128x128.png'
       }
     ],
     data: {
       url: payload.url
     }
+
+    // Chrome does not support sound attribute https://github.com/GoogleChromeLabs/airhorn/issues/18
   }; // end of options
 
   // https://javascript.info/promise-basics
@@ -36,7 +38,7 @@ self.addEventListener('push', (event) => {
 });
 
 // https://stackoverflow.com/a/63917373/1872200
-// aync function is a function that synchronously returns a promise
+// async function is a function that synchronously returns a promise
 async function showNotificationAsync(payload, options) {
   await self.registration.showNotification(payload.title, options);
 }
@@ -44,23 +46,17 @@ async function showNotificationAsync(payload, options) {
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event#examples
 self.addEventListener('notificationclick', (event) => {
   const { action, notification } = event;
-  console.log(JSON.stringify(notification, null, 2))
-
   notification.close();
-  if (action === 'open-product-link') {
+
+  if (action === 'open-a-link') {
     // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
-
     // https://web-push-book.gauntface.com/common-notification-patterns/
-    clients.openWindow(notification.data.url);
+    //clients.openWindow(notification.data.url);
+    event.waitUntil(openLink(notification.data));
   }
-
-  // event.waitUntil(openProductLink(action, data));
 });
 
-async function openProductLink(action, data) {
-  notification.close();
-  if (action === 'open-product-link') {
-    // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
-    await clients.openWindow(data.url);
-  }
+async function openLink(data) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
+  await clients.openWindow(data.url);
 }
