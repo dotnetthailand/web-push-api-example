@@ -1,11 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import PushSubscription from './PushSubscription';
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <PushSubscription />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+// https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis
+const container = document.getElementById('root') as HTMLElement
+const root = createRoot(container);
+root.render(<PushSubscription />);

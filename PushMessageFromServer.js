@@ -26,7 +26,7 @@ const pushSubscription =
     "p256dh": "",
     "auth": ""
   }
-}
+};
 
 const payload = {
   title: `Hello at ${(new Date()).toISOString()}`,

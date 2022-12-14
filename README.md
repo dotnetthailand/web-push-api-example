@@ -46,3 +46,12 @@
 - https://www.bartvanuden.com/2018/01/23/push-notifications-to-your-pwa-with-asp-net-core-2-0-and-aurelia/
 - https://www.tpeczek.com/2017/12/push-notifications-and-aspnet-core-part.html
 - https://stackoverflow.com/a/47617427/1872200
+
+# Upgrade React to major release version
+  ```sh
+  yarn upgrade react --latest
+  yarn upgrade react-dom --latest
+  yarn upgrade react-dom --latest
+  yarn upgrade @types/react --latest
+  yarn upgrade @types/react-dom --latest
+  ```
