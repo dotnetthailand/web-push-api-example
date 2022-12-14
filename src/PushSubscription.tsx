@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 
-export default function App() {
+export default function PushSubscription() {
   const [subscription, setSubscription] = useState('');
   useEffect(() => {
     window.addEventListener('load', async () => {
