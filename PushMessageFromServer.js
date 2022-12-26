@@ -22,15 +22,16 @@ webPush.setVapidDetails(
 const pushSubscription =
 {
   "endpoint": "",
+  "expirationTime": null,
   "keys": {
     "p256dh": "",
     "auth": ""
   }
-};
+}
 
 const payload = {
   title: `Hello at ${(new Date()).toISOString()}`,
-  url: 'https://www.dotnetthailand.com'
+  url: 'https://www.dotnetthailand.com/web-frameworks/orchard-core-cms/why-orchard-core-cms'
 };
 
 webPush.sendNotification(pushSubscription, JSON.stringify(payload));
