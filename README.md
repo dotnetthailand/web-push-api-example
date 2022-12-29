@@ -10,7 +10,7 @@
 
 
 # Send push notification from a server
-- Set a push subscription object that we get after a user's subscribed web push in `PushMessageFromServer.js`
+- Set a push subscription object that we get after a user's subscribed web push in `pushSubscription.json`
 - Then execute the following command:
   ```sh
   $ node PushMessageFromServer.js

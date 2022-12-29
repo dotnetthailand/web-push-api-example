@@ -2,6 +2,7 @@
 // https://felixgerschau.com/web-push-notifications-tutorial/
 // https://developers.google.com/web/fundamentals/codelabs/push-notifications
 const webPush = require('web-push');
+const pushSubscription = require('./pushSubscription.json')
 
 // VAPID keys should be generated only once with: 
 // const vapidKeys = webPush.generateVAPIDKeys();
@@ -18,16 +19,7 @@ webPush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-// This is an sample subscription object that we get after subscript on browser
-const pushSubscription =
-{
-  "endpoint": "",
-  "expirationTime": null,
-  "keys": {
-    "p256dh": "",
-    "auth": ""
-  }
-}
+// pushSubscription is an sample subscription object that we get after subscript on browser
 
 const payload = {
   title: `Hello at ${(new Date()).toISOString()}`,
