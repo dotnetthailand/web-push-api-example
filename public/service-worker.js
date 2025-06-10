@@ -2,6 +2,7 @@
 // https://web-push-book.gauntface.com/display-a-notification/
 self.addEventListener('push', (event) => {
   // https://developer.mozilla.org/en-US/docs/Web/API/PushEvent/data
+  // { title: '', body: '', url: ''}
   const payload = event.data.json();
   console.log(`payload: ${JSON.stringify(payload, null, 2)}`);
 
@@ -50,7 +51,6 @@ self.addEventListener('push', (event) => {
 //   }
 // });
 
-
 self.addEventListener('notificationclick', (event) => {
   const { action, notification } = event;
   notification.close();
@@ -58,7 +58,6 @@ self.addEventListener('notificationclick', (event) => {
   const { url } = notification.data;
   event.waitUntil(sendMessage(event, url));
 });
-
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Clients
 async function sendMessage(event, content) {
@@ -107,7 +106,6 @@ async function sendMessage(event, content) {
     //await chatClient.focus();
   }
 
-
   // Send a message to the client.
   chatClient.postMessage({
     type: 'clipboard',
@@ -120,7 +118,6 @@ async function openLink(data) {
   // https://developer.mozilla.org/en-US/docs/Web/API/Clients/openWindow#return_value
   await clients.openWindow(data.url);
 }
-
 
 // https://stackoverflow.com/a/63917373/1872200
 // async function is a function that synchronously returns a promise
