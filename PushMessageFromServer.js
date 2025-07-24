@@ -19,12 +19,13 @@ webPush.setVapidDetails(
 
 // This is an sample subscription object that we get after subscript on browser
 const pushSubscription =
+
 {
-  "endpoint": "https://fcm.googleapis.com/fcm/send/eh4su7PQuF4:APA91bGJ2lTdArT_n0zLEkth_p7NTqyQ41KtXO5p0SsbcQ2iGgLHz1Y8FyDFS-MnWZjD5e6fair2TozX1bvccy_pHo4k-B3Ov_SLI-7lRvTE1_dppXQvP6IawxnSTBQk6AK5o4ks_mHv",
+  "endpoint": "https://fcm.googleapis.com/fcm/send/fRXzVzVNHiY:APA91bH54ZXsVo1qq0FVb_OoPZ_CPRB2U-CGX6x8seB90AjpZQyu_AIS7BZXQ6XgV9BNBYBCC8_fL3dXxEaAgzNngOcU1ebuHlzfeXb_mAx5KpXlE1on_HEwZi8WPjdyNS9dONGmDaBT",
   "expirationTime": null,
   "keys": {
-    "p256dh": "BEIlI4DO6N7gKHmT_FMHVHt8D2X4FWJp3vx9L8MOONfOsYNuYuxWAUWsscEWH4q5c-t6l5s769gGJr74n40H74w",
-    "auth": "HSyGvAqddC7T0crQ3B6bHw"
+    "p256dh": "BPR7g7k8pWxYFGoF6JRFcXKj6iKjg1bYZQQqB0Ele-LAeY7IhrapymrWMikxnRw82_euZLAFfnD8FT-TZfSsfJA",
+    "auth": "P7ldHqkHFLl93VEkYFi20w"
   }
 }
 

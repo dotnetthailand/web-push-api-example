@@ -84,34 +84,36 @@ async function sendMessage(event, content) {
     type: 'window',
   });
 
-  let chatClient;
+  let homeWindow;
 
-  // Let's see if we already have a chat window open:
+  // Let's see if we already on root URL:
   for (const client of allClients) {
     const url = new URL(client.url);
 
     // https://web-push-book.gauntface.com/common-notification-patterns/
     if (url.pathname === '/') {
-      // Excellent, let's use it!
+
+      console.log('found homeUrlClient');
       await client.focus();
-      chatClient = client;
+      homeWindow = client;
       break;
     }
   }
 
-  // If we didn't find an existing chat window,
+  // If we didn't find an existing window,
   // open a new one:
-  if (!chatClient) {
-    chatClient = await clients.openWindow('/');
-    //await chatClient.focus();
+  if (!homeWindow) {
+    homeWindow = await clients.openWindow('/');
+    // We can't access UI API from service worker, therefore we cannot focus a new created window.
+    // await homeWindow.focus();
+    console.log('new window opened');
   }
 
   // Send a message to the client.
-  chatClient.postMessage({
+  homeWindow.postMessage({
     type: 'clipboard',
     content: content,
   });
-
 }
 
 async function openLink(data) {
@@ -124,4 +126,3 @@ async function openLink(data) {
 async function showNotificationAsync(payload, options) {
   await self.registration.showNotification(payload.title, options);
 }
-

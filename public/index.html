@@ -10,6 +10,7 @@
   <!-- For iOS web push -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
+
 </head>
 
 <body>
@@ -29,9 +30,9 @@
     async function copyContent(message) {
       try {
         await navigator.clipboard.writeText(message);
-        alert("copy");
+        alert("Copied");
         /* Resolved - text copied to clipboard successfully */
-        window.close();
+        //window.close();
       } catch (err) {
         console.error('Failed to copy: ', err);
         /* Rejected - text failed to copy to the clipboard */
